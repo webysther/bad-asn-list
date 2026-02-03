@@ -8,7 +8,10 @@ with open('only number.txt') as f:
 for asn in asns:
     print(f"Collecting IPs from {asn}")
     try:
-        response = requests.get(f"https://asn.ipinfo.app/api/text/list/AS{asn}")
+        response = requests.get(
+            f"https://asn.ipinfo.app/api/text/list/AS{asn}", 
+            timeout=30
+        )
         response.raise_for_status()
         cidrs = response.text.strip().splitlines()
         for cidr in cidrs:
